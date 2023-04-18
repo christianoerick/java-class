@@ -5,7 +5,7 @@ public class Team
 	private String name; // Team's name
 	private ArrayList<Player> players; // Team's player list
 	
-	// Constructor Method: setting only team's name
+	// Constructor Method: setting only team's name test
 	public Team(String name)
 	{
 		this.name = name;
