@@ -9,6 +9,7 @@ public class Team
 	public Team(String name)
 	{
 		this.name = name;
+		this.players = new ArrayList<Player>();
 	}
 	
 	// Method to set/update team's name

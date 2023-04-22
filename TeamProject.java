@@ -11,11 +11,12 @@ public class TeamProject
 	public static void main(String[] args) 
 	{
 		scnr = new Scanner(System.in);
-		
+		teams = new ArrayList<Team>(); //updated
+
 		do
 		{
 			showMainMenu();
-			option = scnr.next().charAt(0);
+			option = scnr.nextLine().toUpperCase().charAt(0);
 			
 			switch(option)
 			{
@@ -36,7 +37,7 @@ public class TeamProject
 		do
 		{
 			showTeamMenu();
-			option = scnr.next().charAt(0);
+			option = scnr.nextLine().toUpperCase().charAt(0);
 			
 			switch(option)
 			{
@@ -56,22 +57,70 @@ public class TeamProject
 	// 
 	
 	// Method to update team's name
-	public static void teamUpdate()
-	{
-		// TODO
+	public static void teamUpdate() {
+		System.out.println("Enter the name of the team to update:");
+		String teamName = scnr.nextLine();
+
+		for (Team team : teams) {
+			if (team.getName().equals(teamName)) {
+				System.out.println("Enter the new name for the team:");
+				String newTeamName = scnr.nextLine();
+				team.setName(newTeamName);
+				System.out.println("Team name updated successfully.");
+				return;
+			}
+		}
+
+		System.out.println("Team not found.");
 	}
+
 	
 	// Method to list players of a team
 	public static void teamPlayerList()
 	{
-		// TODO
+		System.out.println("Enter the name of the team:");
+		String teamName = scnr.nextLine();
+
+		int team = findTeam(teamName);
+		if (team < 0) {
+			System.out.println("Team not found.");
+		} else {
+			Team currentTeam = teams.get(team);
+			currentTeam.printFull();
+		}
 	}
 	
 	// Method to add a player to a team
 	public static void teamPlayerAdd()
 	{
-		// TODO
+		System.out.println("Enter the name of the team:");
+		String teamName = scnr.nextLine();
+
+		int team = findTeam(teamName);
+		if (team < 0) {
+			System.out.println("Team not found.");
+		} else {
+			Team currentTeam = teams.get(team);
+			System.out.println("Enter the player's name:");
+			String name = scnr.nextLine();
+
+			System.out.println("Enter the player's jersey:");
+			int jersey = scnr.nextInt();
+			scnr.nextLine();
+
+			System.out.println("Enter the player's score:");
+			
+			int score = Integer.parseInt(scnr.nextLine());
+
+			Player newPlayer = new Player(name, jersey, score);
+			currentTeam.addPlayer(newPlayer);
+
+			System.out.println("Player added successfully.");
+		}
+
+
 	}
+
 	
 	// Method to edit a player of a team
 	public static void teamPlayerEdit()
@@ -95,24 +144,65 @@ public class TeamProject
 	public static void teamPrint()
 	{
 		// TODO
+		
 	}
 	
 	// Method to print a team
 	public static void mainTeamPrint()
 	{
-		// TODO
+		System.out.println("Enter the name of the team to print:");
+		String teamName = scnr.nextLine();
+	
+		// Search for the team in the list of teams
+		boolean found = false;
+		for (Team team : teams) {
+			if (team.getName().equals(teamName)) {
+				team.print();
+				found = true;
+				break;
+			}
+		}
+	
+		// Print an error message if the team was not found
+		if (!found) {
+			System.out.println("Team not found.");
+		}
 	}
 	
 	// Method to remove a team
 	public static void mainTeamDelete()
 	{
-		// TODO
+		System.out.println("Enter the name of the team to delete:");
+		String teamName = scnr.nextLine();
+
+		boolean isDeleted = false;
+		for (int i = 0; i < teams.size(); i++)
+		{
+			if (teams.get(i).getName().equals(teamName))
+			{
+				teams.remove(i);
+				isDeleted = true;
+				System.out.println("Team deleted successfully.");
+				break;
+			}
+		}
+		if (!isDeleted)
+		{
+			System.out.println("Team not found.");
+		}
+
 	}
 	
 	// Method to add a team
 	public static void mainTeamAdd()
 	{
-		// TODO
+		System.out.println("Enter the name of the team:");
+		String teamName = scnr.nextLine();
+		
+		Team newTeam = new Team(teamName);
+		teams.add(newTeam);
+
+		System.out.println("Team added successfully.");
 	}
 	
 	// Method to list all teams and print their basic information
@@ -183,5 +273,16 @@ public class TeamProject
 		printDivisor("");
 		
 		System.out.print("Select an option: ");
+	}
+	public static int findTeam(String teamName)
+	{
+		teamIndice = -1;
+		for (int i=0; i < teams.size(); ++i){
+			if (teamName.equals(teams.get(i).getName()))
+			{
+				teamIndice = i;
+			}
+		}
+		return teamIndice;
 	}
 }
