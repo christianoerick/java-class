@@ -4,8 +4,8 @@ public class Team
 {
 	private String name; // Team's name
 	private ArrayList<Player> players; // Team's player list
-    private int playerIndex = -1;
-    private Helper helper;
+	private int playerIndex = -1;
+	private Helper helper;
 	
 	// Constructor Method: setting only team's name
 	public Team(String name)
@@ -13,8 +13,8 @@ public class Team
 		this.name = name;
 		
 		this.players = new ArrayList<Player>();
-
-        this.helper = new Helper();
+		
+		this.helper = new Helper();
 	}
 	
 	// Method to set/update team's name
@@ -49,82 +49,82 @@ public class Team
 	// Method to print all players
 	public void listPlayersByName()
 	{
-        int total = this.players.size();
-
-        if (total > 0)
-        {
-            int i;
-            String[] list = new String[total];
-            
-            for (i = 0; i < total; ++i) 
-            {
-                list[i] = this.players.get(i).getName();
-            }
-
-            int[] result = this.helper.sortString(list);
-
-            System.out.println("Players by name:");
-            for (i = 0; i < total; ++i) 
-            {
-                this.players.get(result[i]).print();
-            }
-        }
-        else
-        {
-            System.out.println("No players have been added.");
-        }
+		int total = this.players.size();
+		
+		if (total > 0)
+		{
+			int i;
+			String[] list = new String[total];
+			
+			for (i = 0; i < total; ++i) 
+			{
+				list[i] = this.players.get(i).getName();
+			}
+			
+			int[] result = this.helper.sortString(list);
+			
+			System.out.println("Players by name:");
+			for (i = 0; i < total; ++i) 
+			{
+				this.players.get(result[i]).print();
+			}
+		}
+		else
+		{
+			System.out.println("No players have been added.");
+		}
 	}
-
+	
 	// Method to print all players ordered by jersey
 	public void listPlayersByJersey()
 	{
 		int total = this.players.size();
-        if (total > 0)
-        {
-            int i;
-            int[] list = new int[total];;
-            
-            for (i = 0; i < total; ++i) 
-            {
-                list[i] = this.players.get(i).getJersey();
-            }
-            
-            int[] result = this.helper.sortInt(list);
-            
-            System.out.println("Players by jersey:");
-            for (i = 0; i < total; ++i) 
-            {
-                this.players.get(result[i]).print();
-            }
-        }
+		if (total > 0)
+		{
+			int i;
+			int[] list = new int[total];;
+			
+			for (i = 0; i < total; ++i) 
+			{
+				list[i] = this.players.get(i).getJersey();
+			}
+			
+			int[] result = this.helper.sortInt(list);
+			
+			System.out.println("Players by jersey:");
+			for (i = 0; i < total; ++i) 
+			{
+				this.players.get(result[i]).print();
+			}
+		}
 	}
-
+	
 	// Method to print all players ordered by score
 	public void listPlayersByScore()
 	{
-        int total = this.players.size();
-        if (total > 0)
-        {
-            int i;
-            int[] list = new int[total];;
-            
-            for (i = 0; i < total; ++i) 
-            {
-                list[i] = this.players.get(i).getScore();
-            }
-            
-            int[] result = this.helper.sortInt(list);
-            
-            System.out.println("Players by score:");
-            for (i = 0; i < total; ++i) 
-            {
-                this.players.get(result[i]).print();
-            }
-        }
-        else
-        {
-            System.out.println("No players have been added.");
-        }
+		int total = this.players.size();
+		if (total > 0)
+		{
+			int i;
+			int[] list = new int[total];;
+			
+			for (i = 0; i < total; ++i) 
+			{
+				list[i] = this.players.get(i).getScore();
+			}
+			
+			int[] result = this.helper.sortInt(list);
+			
+			System.out.println("Players by score:");
+			for (i = 0; i < total; ++i) 
+			{
+				this.players.get(result[i]).print();
+			}
+		}
+		else
+		{
+			System.out.println("No players have been added.");
+		}
 	}
 	
 	// Method to add a player to the team
@@ -152,35 +152,35 @@ public class Team
 		}
 	}
 
-    // Method to delete a player by jersey
-    public void playerFindAndDelete(int jersey, boolean printNotFound)
-    {
-        if (playerFind(jersey, printNotFound))
-        {
-            this.players.remove(playerIndex);
-            System.out.println("Player with jersey '" + jersey + "' was successfully deleted.");
-        }
-    }
-
-    // Method to delete a player by jersey
-    public int playerFindAndToEdit(int jersey, boolean printNotFound)
-    {
-        int result = -1;
-        if (playerFind(jersey, printNotFound))
-        {
-            result = playerIndex;
-        }
-        return result;
-    }
-
-    // Method to print a player by jersey
-    public void playerFindAndPrint(int jersey, boolean printNotFound)
-    {
-        if (playerFind(jersey, printNotFound))
-        {
-            this.players.get(playerIndex).print();
-        }
-    }
+	// Method to delete a player by jersey
+	public void playerFindAndDelete(int jersey, boolean printNotFound)
+	{
+		if (playerFind(jersey, printNotFound))
+		{
+			this.players.remove(playerIndex);
+			System.out.println("Player with jersey '" + jersey + "' was successfully deleted.");
+		}
+	}
+	
+	// Method to delete a player by jersey
+	public int playerFindAndToEdit(int jersey, boolean printNotFound)
+	{
+		int result = -1;
+		if (playerFind(jersey, printNotFound))
+		{
+			result = playerIndex;
+		}
+		return result;
+	}
+	
+	// Method to print a player by jersey
+	public void playerFindAndPrint(int jersey, boolean printNotFound)
+	{
+		if (playerFind(jersey, printNotFound))
+		{
+			this.players.get(playerIndex).print();
+		}
+	}
 	
 	// Method to find a player by jersey
 	public boolean playerFind(int jersey, boolean printNotFound)
@@ -199,11 +199,11 @@ public class Team
 					result = true;
 				}
 			}
-
-            if (printNotFound && !result)
-            {
-                System.out.println("Player with jersey '" + jersey + "' not found.");
-            }
+			
+			if (printNotFound && !result)
+			{
+				System.out.println("Player with jersey '" + jersey + "' not found.");
+			}
 		} 
 		else 
 		{
